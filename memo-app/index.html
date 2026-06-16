@@ -11,7 +11,11 @@
     <aside class="sidebar">
       <div class="sidebar-header">
         <h1>메모장</h1>
-        <button id="btn-new" title="새 메모">+</button>
+        <div class="header-actions">
+          <button id="btn-theme" title="테마 전환">🌙</button>
+          <button id="btn-showcase" title="전체 보기">✨</button>
+          <button id="btn-new" title="새 메모">+</button>
+        </div>
       </div>
       <input id="search" type="text" placeholder="메모 검색..." />
       <ul id="memo-list"></ul>
@@ -20,11 +24,44 @@
     <main class="editor">
       <div class="editor-toolbar">
         <span id="memo-date"></span>
+        <div class="tab-group">
+          <button id="tab-text" class="tab active">텍스트</button>
+          <button id="tab-draw" class="tab">그림판</button>
+        </div>
         <button id="btn-delete" title="삭제" disabled>삭제</button>
       </div>
-      <input id="memo-title" type="text" placeholder="제목" maxlength="100" disabled />
-      <textarea id="memo-content" placeholder="내용을 입력하세요..." disabled></textarea>
+
+      <!-- 텍스트 영역 -->
+      <div id="panel-text">
+        <input id="memo-title" type="text" placeholder="제목" maxlength="100" disabled />
+        <textarea id="memo-content" placeholder="내용을 입력하세요..." disabled></textarea>
+      </div>
+
+      <!-- 그림판 영역 -->
+      <div id="panel-draw" class="hidden">
+        <div class="draw-toolbar">
+          <button class="tool-btn active" id="tool-pen" title="펜">✏️</button>
+          <button class="tool-btn" id="tool-eraser" title="지우개">🧹</button>
+          <div class="divider"></div>
+          <input type="color" id="color-picker" value="#4a9eff" title="색상" />
+          <div class="divider"></div>
+          <label class="size-label">굵기</label>
+          <input type="range" id="brush-size" min="1" max="40" value="4" />
+          <span id="size-display">4</span>
+          <div class="divider"></div>
+          <button id="btn-clear-canvas" title="전체 지우기">전체 지우기</button>
+          <button id="btn-save-img" title="이미지 저장">저장</button>
+        </div>
+        <canvas id="draw-canvas"></canvas>
+      </div>
     </main>
+  </div>
+
+  <!-- 빅뱅 쇼케이스 -->
+  <div id="showcase-overlay" class="showcase-hidden">
+    <div id="showcase-grid"></div>
+    <p class="showcase-hint">✦ 카드를 클릭하면 해당 메모로 이동 &nbsp;·&nbsp; ESC로 닫기 ✦</p>
+    <button id="btn-showcase-close">✕</button>
   </div>
 
   <script src="js/app.js"></script>

@@ -1,3 +1,61 @@
+/* ── 테마 변수 ── */
+:root {
+  --bg-app:       #1e1e1e;
+  --bg-sidebar:   #252525;
+  --bg-item-hover:#2e2e2e;
+  --bg-item-active:#3a3a3a;
+  --bg-input:     #333;
+  --bg-tab-group: #2e2e2e;
+  --bg-draw-toolbar: #252525;
+
+  --border:       #333;
+  --border-input: #444;
+
+  --text-primary: #ffffff;
+  --text-body:    #d0d0d0;
+  --text-sub:     #888;
+  --text-muted:   #666;
+  --text-placeholder: #444;
+
+  --accent:       #4a9eff;
+  --accent-hover: #3a8eef;
+  --danger:       #cc4444;
+
+  --canvas-bg:    #ffffff;
+  --eraser-color: #ffffff;
+
+  --scrollbar:    #444;
+}
+
+[data-theme="light"] {
+  --bg-app:       #f5f5f5;
+  --bg-sidebar:   #ffffff;
+  --bg-item-hover:#f0f0f0;
+  --bg-item-active:#e8e8e8;
+  --bg-input:     #f0f0f0;
+  --bg-tab-group: #e8e8e8;
+  --bg-draw-toolbar: #f8f8f8;
+
+  --border:       #e0e0e0;
+  --border-input: #d0d0d0;
+
+  --text-primary: #111111;
+  --text-body:    #333333;
+  --text-sub:     #666666;
+  --text-muted:   #999999;
+  --text-placeholder: #bbbbbb;
+
+  --accent:       #1a7fff;
+  --accent-hover: #0a6fee;
+  --danger:       #d63333;
+
+  --canvas-bg:    #ffffff;
+  --eraser-color: #ffffff;
+
+  --scrollbar:    #ccc;
+}
+
+/* ── 리셋 ── */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -6,10 +64,11 @@
 
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  background: #1e1e1e;
-  color: #e0e0e0;
+  background: var(--bg-app);
+  color: var(--text-body);
   height: 100vh;
   overflow: hidden;
+  transition: background 0.2s, color 0.2s;
 }
 
 .app {
@@ -20,11 +79,12 @@ body {
 /* ── 사이드바 ── */
 .sidebar {
   width: 260px;
-  background: #252525;
-  border-right: 1px solid #333;
+  background: var(--bg-sidebar);
+  border-right: 1px solid var(--border);
   display: flex;
   flex-direction: column;
   flex-shrink: 0;
+  transition: background 0.2s;
 }
 
 .sidebar-header {
@@ -32,21 +92,43 @@ body {
   align-items: center;
   justify-content: space-between;
   padding: 16px;
-  border-bottom: 1px solid #333;
+  border-bottom: 1px solid var(--border);
 }
 
 .sidebar-header h1 {
   font-size: 16px;
   font-weight: 600;
-  color: #fff;
+  color: var(--text-primary);
 }
+
+.header-actions {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+#btn-theme {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  border: 1px solid var(--border-input);
+  background: transparent;
+  font-size: 15px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.1s;
+}
+
+#btn-theme:hover { background: var(--bg-item-hover); }
 
 #btn-new {
   width: 28px;
   height: 28px;
   border-radius: 6px;
   border: none;
-  background: #4a9eff;
+  background: var(--accent);
   color: #fff;
   font-size: 20px;
   line-height: 1;
@@ -54,26 +136,24 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: background 0.1s;
 }
 
-#btn-new:hover {
-  background: #3a8eef;
-}
+#btn-new:hover { background: var(--accent-hover); }
 
 #search {
   margin: 12px;
   padding: 8px 10px;
-  background: #333;
-  border: 1px solid #444;
+  background: var(--bg-input);
+  border: 1px solid var(--border-input);
   border-radius: 6px;
-  color: #e0e0e0;
+  color: var(--text-body);
   font-size: 13px;
   outline: none;
+  transition: background 0.2s, border-color 0.1s;
 }
 
-#search:focus {
-  border-color: #4a9eff;
-}
+#search:focus { border-color: var(--accent); }
 
 #memo-list {
   list-style: none;
@@ -84,22 +164,17 @@ body {
 #memo-list li {
   padding: 12px 16px;
   cursor: pointer;
-  border-bottom: 1px solid #2e2e2e;
+  border-bottom: 1px solid var(--border);
   transition: background 0.1s;
 }
 
-#memo-list li:hover {
-  background: #2e2e2e;
-}
-
-#memo-list li.active {
-  background: #3a3a3a;
-}
+#memo-list li:hover  { background: var(--bg-item-hover); }
+#memo-list li.active { background: var(--bg-item-active); }
 
 #memo-list li .item-title {
   font-size: 14px;
   font-weight: 500;
-  color: #e0e0e0;
+  color: var(--text-primary);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -107,7 +182,7 @@ body {
 
 #memo-list li .item-preview {
   font-size: 12px;
-  color: #888;
+  color: var(--text-sub);
   margin-top: 3px;
   white-space: nowrap;
   overflow: hidden;
@@ -116,13 +191,13 @@ body {
 
 #memo-list li .item-date {
   font-size: 11px;
-  color: #666;
+  color: var(--text-muted);
   margin-top: 3px;
 }
 
 .empty-list {
   text-align: center;
-  color: #555;
+  color: var(--text-muted);
   font-size: 13px;
   padding: 32px 16px;
 }
@@ -132,43 +207,82 @@ body {
   flex: 1;
   display: flex;
   flex-direction: column;
-  background: #1e1e1e;
+  background: var(--bg-app);
+  min-width: 0;
+  transition: background 0.2s;
 }
 
 .editor-toolbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 12px 20px;
-  border-bottom: 1px solid #333;
+  padding: 8px 20px;
+  border-bottom: 1px solid var(--border);
   min-height: 44px;
+  gap: 12px;
 }
 
 #memo-date {
   font-size: 12px;
-  color: #666;
+  color: var(--text-muted);
+  flex-shrink: 0;
 }
 
+/* ── 탭 ── */
+.tab-group {
+  display: flex;
+  background: var(--bg-tab-group);
+  border-radius: 7px;
+  padding: 3px;
+  gap: 2px;
+}
+
+.tab {
+  padding: 4px 14px;
+  border: none;
+  background: transparent;
+  color: var(--text-sub);
+  font-size: 13px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.tab.active {
+  background: var(--accent);
+  color: #fff;
+}
+
+/* ── 삭제 버튼 ── */
 #btn-delete {
   padding: 5px 12px;
   background: transparent;
-  border: 1px solid #555;
+  border: 1px solid var(--border-input);
   border-radius: 5px;
-  color: #cc4444;
+  color: var(--danger);
   font-size: 13px;
   cursor: pointer;
   transition: all 0.1s;
+  flex-shrink: 0;
 }
 
 #btn-delete:hover:not(:disabled) {
-  background: #cc4444;
+  background: var(--danger);
   color: #fff;
-  border-color: #cc4444;
+  border-color: var(--danger);
 }
 
 #btn-delete:disabled {
   opacity: 0.3;
   cursor: default;
+}
+
+/* ── 텍스트 패널 ── */
+#panel-text {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow: hidden;
 }
 
 #memo-title {
@@ -178,17 +292,13 @@ body {
   outline: none;
   font-size: 22px;
   font-weight: 600;
-  color: #fff;
+  color: var(--text-primary);
   width: 100%;
+  transition: color 0.2s;
 }
 
-#memo-title::placeholder {
-  color: #444;
-}
-
-#memo-title:disabled {
-  color: #555;
-}
+#memo-title::placeholder { color: var(--text-placeholder); }
+#memo-title:disabled      { color: var(--text-placeholder); }
 
 #memo-content {
   flex: 1;
@@ -198,29 +308,200 @@ body {
   outline: none;
   font-size: 15px;
   line-height: 1.7;
-  color: #d0d0d0;
+  color: var(--text-body);
   resize: none;
   font-family: inherit;
+  transition: color 0.2s;
 }
 
-#memo-content::placeholder {
-  color: #444;
+#memo-content::placeholder { color: var(--text-placeholder); }
+#memo-content:disabled      { color: var(--text-placeholder); }
+
+/* ── 그림판 패널 ── */
+#panel-draw {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow: hidden;
 }
 
-#memo-content:disabled {
-  color: #555;
+#panel-draw.hidden,
+#panel-text.hidden {
+  display: none;
 }
+
+.draw-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: var(--bg-draw-toolbar);
+  border-bottom: 1px solid var(--border);
+  flex-wrap: wrap;
+  transition: background 0.2s;
+}
+
+.tool-btn {
+  width: 34px;
+  height: 34px;
+  border: 1px solid var(--border-input);
+  border-radius: 6px;
+  background: transparent;
+  cursor: pointer;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.1s;
+}
+
+.tool-btn:hover  { background: var(--bg-item-hover); }
+.tool-btn.active { background: var(--accent); border-color: var(--accent); }
+
+.divider {
+  width: 1px;
+  height: 24px;
+  background: var(--border-input);
+  margin: 0 4px;
+}
+
+#color-picker {
+  width: 34px;
+  height: 34px;
+  border: 1px solid var(--border-input);
+  border-radius: 6px;
+  background: transparent;
+  cursor: pointer;
+  padding: 2px;
+}
+
+.size-label {
+  font-size: 12px;
+  color: var(--text-sub);
+}
+
+#brush-size {
+  width: 80px;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+
+#size-display {
+  font-size: 12px;
+  color: var(--text-sub);
+  min-width: 20px;
+}
+
+#btn-clear-canvas,
+#btn-save-img {
+  padding: 5px 12px;
+  background: transparent;
+  border: 1px solid var(--border-input);
+  border-radius: 5px;
+  color: var(--text-sub);
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.1s;
+}
+
+#btn-clear-canvas:hover { border-color: var(--danger); color: var(--danger); }
+#btn-save-img:hover     { border-color: var(--accent); color: var(--accent); }
+
+#draw-canvas {
+  flex: 1;
+  display: block;
+  cursor: crosshair;
+  background: var(--canvas-bg);
+}
+
+/* ── ✨ 인첸트 쇼케이스 ── */
+#showcase-overlay {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 40%, #0e0020 0%, #03000e 70%, #000005 100%);
+  z-index: 100;
+  overflow: hidden;
+}
+
+#showcase-overlay.showcase-hidden { display: none; }
+
+/* 캔버스 + 이미지 컨테이너 */
+#showcase-grid {
+  position: absolute;
+  inset: 0;
+}
+
+#enchant-canvas {
+  position: absolute;
+  inset: 0;
+  display: block;
+}
+
+/* 그림 — 흰 배경 제거(invert+screen), 박스 없음 */
+.enchant-drawing {
+  position: absolute;
+  left: 0; top: 0;
+  width: 360px;
+  pointer-events: none;
+  filter: invert(1) brightness(1.35) saturate(1.4);
+  mix-blend-mode: screen;
+  opacity: 0.88;
+  border-radius: 0;
+}
+
+/* 힌트 */
+.showcase-hint {
+  position: absolute;
+  bottom: 22px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 11px;
+  color: rgba(180, 100, 255, 0.28);
+  pointer-events: none;
+  z-index: 3;
+  white-space: nowrap;
+  letter-spacing: 1.2px;
+}
+
+/* 닫기 버튼 */
+#btn-showcase-close {
+  position: absolute;
+  top: 18px; right: 18px;
+  z-index: 3;
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  border: 1px solid rgba(180, 80, 255, 0.3);
+  background: rgba(80, 10, 130, 0.18);
+  color: rgba(210, 140, 255, 0.7);
+  font-size: 14px;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  transition: all 0.15s;
+}
+
+#btn-showcase-close:hover {
+  background: rgba(130, 40, 200, 0.35);
+  color: #e0b0ff;
+  border-color: rgba(210, 120, 255, 0.5);
+}
+
+/* ✨ 사이드바 버튼 */
+#btn-showcase {
+  width: 28px; height: 28px;
+  border-radius: 6px;
+  border: 1px solid var(--border-input);
+  background: transparent;
+  font-size: 15px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.1s;
+}
+
+#btn-showcase:hover { background: var(--bg-item-hover); }
 
 /* 스크롤바 */
-::-webkit-scrollbar {
-  width: 6px;
-}
-
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #444;
-  border-radius: 3px;
-}
+::-webkit-scrollbar       { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--scrollbar); border-radius: 3px; }
