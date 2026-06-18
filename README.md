@@ -1,21 +1,34 @@
-# DSM KAIST Project
+# DSM KAIST Project — 메모장
 
 배포 링크: https://dsm-kaist-project-production.up.railway.app
 
-## 작업 내역
+## 기능 소개
 
-### 1. 프로젝트 구조 변경
-- `memo-app/` 하위에 있던 파일들을 루트 디렉토리로 이동
-- Railway가 프로젝트를 인식할 수 있도록 구조 정리
-  - `memo-app/index.html` → `index.html`
-  - `memo-app/css/style.css` → `css/style.css`
-  - `memo-app/js/app.js` → `js/app.js`
+### 메모 작성 및 관리
+- 메모 생성, 수정, 삭제 (Ctrl+N으로 새 메모, Ctrl+Backspace로 삭제)
+- 제목과 내용 입력 시 자동 저장 (로컬스토리지 기반)
+- 최근 수정된 메모가 목록 상단에 자동 정렬
 
-### 2. Railway 배포 설정
-- `package.json` 추가
-- `serve` 패키지를 이용한 정적 파일 서버 구성
-- Railway에서 `npm start` → `npx serve .` 로 자동 실행
+### 메모 검색
+- 사이드바 검색창에서 제목/내용 실시간 검색
 
-### 3. 기타
-- GitHub 계정 `ch0ijimin323`의 Admin 권한 요청 이슈 생성 ([#1](https://github.com/sebeen-lee/dsm-kaist-project/issues/1))
-- README.md 생성 및 배포 링크 추가
+### 그림판
+- 텍스트/그림판 탭 전환 지원
+- 펜, 지우개 도구 제공
+- 색상 선택 및 브러시 굵기 조절 (1~40)
+- 그림 전체 지우기 및 PNG 이미지로 저장
+- 마우스 및 터치 입력 지원
+
+### 테마
+- 다크 모드 / 라이트 모드 전환
+- 선택한 테마는 브라우저에 저장되어 유지
+
+### 쇼케이스 모드
+- 모든 메모의 텍스트가 화면 위를 떠다니는 애니메이션 효과
+- 그림 메모도 함께 표시 (색상 반전 블렌딩 처리)
+- ESC 또는 닫기 버튼으로 종료
+
+## 기술 스택
+- HTML / CSS / JavaScript (프레임워크 없음)
+- 로컬스토리지를 이용한 데이터 저장
+- Railway 배포 (serve 정적 서버)
